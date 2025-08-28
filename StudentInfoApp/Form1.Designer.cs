@@ -279,9 +279,12 @@
             // dateBirth
             // 
             dateBirth.Location = new Point(6, 157);
+            dateBirth.MaxDate = new DateTime(2012, 12, 31, 0, 0, 0, 0);
+            dateBirth.MinDate = new DateTime(1900, 1, 1, 0, 0, 0, 0);
             dateBirth.Name = "dateBirth";
             dateBirth.Size = new Size(200, 23);
             dateBirth.TabIndex = 10;
+            dateBirth.Value = new DateTime(2012, 12, 31, 0, 0, 0, 0);
             // 
             // label5
             // 
@@ -331,7 +334,6 @@
             txtPhoneNo.PromptChar = '0';
             txtPhoneNo.Size = new Size(194, 23);
             txtPhoneNo.TabIndex = 5;
-            txtPhoneNo.Text = " 9121231234";
             // 
             // txtFirstName
             // 
