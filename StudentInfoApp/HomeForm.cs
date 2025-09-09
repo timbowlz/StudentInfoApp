@@ -2,9 +2,9 @@ using System.Windows.Forms;
 
 namespace StudentInfoApp
 {
-    public partial class Form1 : Form
+    public partial class HomeForm : Form
     {
-        public Form1()
+        public HomeForm()
         {
             InitializeComponent();
         }
@@ -30,6 +30,7 @@ namespace StudentInfoApp
             if (!string.IsNullOrEmpty(imagePath) && File.Exists(imagePath))
             {
                 pictureBox1.Image = Image.FromFile(imagePath);
+                pictureBox2.Image = Image.FromFile(imagePath);
                 pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             }
         }
@@ -66,10 +67,11 @@ namespace StudentInfoApp
         // Submition Handler
         private void button2_Click(object sender, EventArgs e)
         {
+
             if (string.IsNullOrWhiteSpace(txtLastName.Text) ||
                 string.IsNullOrWhiteSpace(txtFirstName.Text) ||
                 string.IsNullOrWhiteSpace(txtPhoneNo.Text) ||
-                pictureBox1.Image == null ||
+                string.IsNullOrWhiteSpace(txtStudentIdNo.Text) ||
                 !radioSelected)
             {
                 MessageBox.Show("Please fill in all fields.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -78,7 +80,62 @@ namespace StudentInfoApp
             else
             {
                 MessageBox.Show("Data submitted successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                lastName.Text = txtLastName.Text;
+                firstName.Text = txtFirstName.Text;
+                phoneNo.Text = txtPhoneNo.Text;
+                studentIdNo.Text = txtStudentIdNo.Text;
+                gender.Text = groupBox1.Controls.OfType<RadioButton>().FirstOrDefault(rb => rb.Checked)?.Text;
+                dateOfBirth.Text = dateBirth.Value.ToShortDateString();
+                course.Text = comboBox1.Text;
+                college.Text = comboBox2.Text;
+                AddCheckedCheckBoxesToListBox();
+                satisfaction.Text = trackBar1.Value.ToString();
+                pictureBox2.Image = pictureBox1.Image;
             }
+        }
+
+        private void groupBox3_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label26_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void AddCheckedCheckBoxesToListBox()
+        {
+            // Clear previous items
+            listBox1.Items.Clear();
+
+            // Add checked CheckBox texts to the ListBox
+            foreach (var cb in new[] { checkBox1, checkBox2, checkBox3, checkBox4, checkBox5 })
+            {
+                if (cb.Checked)
+                {
+                    listBox1.Items.Add(cb.Text);
+                }
+            }
+        }
+
+        private void btnMale_CheckedChanged(object sender, EventArgs e)
+        {
+            radioSelected = groupBox1.Controls.OfType<RadioButton>().Any(rb => rb.Checked);
+        }
+
+        private void btnFemale_CheckedChanged(object sender, EventArgs e)
+        {
+            radioSelected = groupBox1.Controls.OfType<RadioButton>().Any(rb => rb.Checked);
         }
     }
 }
