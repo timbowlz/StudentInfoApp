@@ -30,15 +30,27 @@ public partial class LoginForm : Form
 
             if (Convert.ToInt32(cmd.ExecuteScalar()) > 0)
             {
-                MessageBox.Show("Login successful!");
+                MessageBox.Show("Login successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 Hide();
                 // Replace 'Form1' with your main form class name if different
-                new HomeForm().Show();
+                new HomeForm().Show(); // open main form
             }
             else
             {
-                MessageBox.Show("Invalid username or password.");
+                MessageBox.Show("Invalid username or password.", "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            
+            /*  HARDCODED LOGIN (FOR REFERENCE ONLY)
+             *  string user = txtUsername.Text;
+                string pass = txtPassword.Text;
+                if (user == "admin" && pass == "1234")
+                {
+                    this.Hide(); // hide login window
+                    HomeForm home = new HomeForm();
+                    home.Show(); // show main home window
+                }
+                else {MessageBox.Show("Invalid username or password.");}
+             */
         }
 
         private void btnCancel_Click(object sender, EventArgs e) => Application.Exit();
