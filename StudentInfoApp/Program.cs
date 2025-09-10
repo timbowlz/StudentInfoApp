@@ -15,8 +15,8 @@ namespace StudentInfoApp
         [STAThread]
         static void Main()
         {
-            string dbPath = Path.GetFullPath("sis.db");
-            if (!File.Exists(dbPath))
+            // Ensure database + default user exists
+            using (var conn = new SQLiteConnection("Data Source=sis.db;Version=3;"))
             {
                 SQLiteConnection.CreateFile(dbPath);
             }
